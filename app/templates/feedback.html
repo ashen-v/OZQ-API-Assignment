@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Submit Feedback</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>We value your feedback!</h1>
+    <form id="feedbackForm">
+        <textarea name="feedback" rows="5" cols="50" placeholder="Write your feedback here..." required></textarea><br><br>
+        <button type="submit">Submit Feedback</button>
+    </form>
+
+    <p id="message"></p>
+
+    <script>
+        document.getElementById("feedbackForm").addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const token = localStorage.getItem("access_token");
+            if (!token) {
+                document.getElementById("message").innerText = "You must be logged in to submit feedback.";
+                return;
+            }
+
+            const feedbackText = e.target.elements.feedback.value;
+
+            const response = await fetch("/feedback/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + token
+                },
+                body: JSON.stringify({ feedback: feedbackText })
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                document.getElementById("message").innerText = "✅ Feedback submitted!";
+                e.target.reset();
+            } else {
+                document.getElementById("message").innerText = "❌ " + (result.detail || "Error submitting feedback.");
+            }
+        });
+    </script>
+</body>
+</html>

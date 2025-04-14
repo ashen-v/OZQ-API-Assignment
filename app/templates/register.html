@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register | OZQ</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Register to <span class="brand">OZQ</span></h2>
+        <form id="registerForm">
+            <input type="text" id="username" placeholder="Username" required />
+            <input type="email" id="email" placeholder="Email" required />
+            <input type="password" id="password" placeholder="Password" required />
+            <button type="submit">Register</button>
+        </form>
+        <p id="responseMsg"></p>
+    </div>
+
+    <script>
+        document.getElementById("registerForm").addEventListener("submit", async function(e) {
+            e.preventDefault();
+
+            const userData = {
+                username: document.getElementById("username").value,
+                email: document.getElementById("email").value,
+                password: document.getElementById("password").value
+            };
+
+            const response = await fetch("/users/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(userData)
+            });
+
+            const msg = document.getElementById("responseMsg");
+            if (response.ok) {
+                msg.innerText = "✅ Successfully registered!";
+                msg.style.color = "green";
+                window.location.href = "/home";
+            } else {
+                const error = await response.json();
+                msg.innerText = `❌ Error: ${error.detail}`;
+                msg.style.color = "red";
+            }
+        });
+    </script>
+</body>
+</html>

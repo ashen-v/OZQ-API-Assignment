@@ -23,13 +23,11 @@ def add_cart(cart: Cart, db: Session = Depends(get_db), user=Depends(get_current
 
 
 # get users cart
-@router.get("/{id}",status_code=status.HTTP_201_CREATED, response_model=Cart)
-def add_cart(id : int, db: Session = Depends(get_db), user=Depends(get_current_user)):
+@router.get("/", response_model=list[Cart])
+def get_my_cart(db: Session = Depends(get_db), user=Depends(get_current_user)):
+    cart_items = db.query(CartItem).filter(CartItem.user_id == user.user_id).all()
+    return cart_items
 
-    cart = db.query(CartItem).filter(CartItem.user_id == id).first()
-    if not cart:
-        return ("cart is empty")
-    return cart
 
 #delete cart
 @router.delete("/{id}")

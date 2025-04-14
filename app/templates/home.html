@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>OZQ Products</title>
+    <link rel="stylesheet" href="/static/style1.css">
+    <style>
+        .navbar {
+            background-color: #222;
+            padding: 1rem;
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            background-color: #444;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar a:hover {
+            background-color: #666;
+        }
+
+        .products-container {
+            padding: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .card {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 1rem;
+            width: 200px;
+        }
+
+        .card img {
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="/register">Register</a>
+        <a href="/login">Login</a>
+        <a href="/cart-page">Cart</a>
+        <a href="/feedback">feedback</a>
+    </div>
+
+    <h1 style="text-align:center">OZQ Store - Top Products</h1>
+
+    <div class="products-container">
+        {% for product in products %}
+        <div class="card">
+            <h2>{{ product.title }}</h2>
+            <img src="{{ product.thumbnail }}" alt="{{ product.title }}" width="150">
+            <p>{{ product.description }}</p>
+            <p>Price: ${{ product.price }}</p>
+            <button class="add-to-cart-btn"
+                    data-id="{{ product.id }}"
+                    data-title="{{ product.title }}">Add to Cart</button>
+        </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        document.querySelectorAll(".add-to-cart-btn").forEach(button => {
+            button.addEventListener("click", () => {
+                const productId = button.getAttribute("data-id");
+                const productTitle = button.getAttribute("data-title");
+
+                fetch("/cart/", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + localStorage.getItem("access_token")
+                    },
+                    body: JSON.stringify({
+                        product_id: parseInt(productId),
+                        product_title: productTitle,
+                        quantity: 1
+                    })
+                }).then(response => {
+                    if (!response.ok) throw new Error("Not authorized or other error");
+                    return response.json();
+                }).then(data => {
+                    alert("Added to cart!");
+                }).catch(err => {
+                    alert("Error: " + err.message);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
