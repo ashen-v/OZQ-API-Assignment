@@ -7,20 +7,20 @@ browser products, add them to carts and post feedback
 
 -- Features --
 
-1.JWT- based authetication ( 5 hours per session (300 minutes) session time can be changed by changing 
-variable ACESS_TOKEN_EXPIRE_MINUTES variable  in app/oauth2.py
-2.password hashing using bycrypt
-3.simple REST APIs uses POST, GET
-4.Jinja2 templates for front end
-5.PostgresSQL for database SQLAlchemy for ORM
-6.Oauth2 Password requestform for login
+1. JWT- based authetication ( 5 hours per session (300 minutes) session time can be changed by changing 
+variable ACESS_TOKEN_EXPIRE_MINUTES variable  in app/oauth2.py)
+2. password hashing using bycrypt
+3. simple REST APIs uses POST, GET
+4. Jinja2 templates for front end
+5. PostgresSQL for database SQLAlchemy for ORM
+6. Oauth2 Password requestform for login
 
 
 
 --- requirements ---
 
-1.python 3.9 +
-2.postgreSQL
+1. python 3.9 +
+2. postgreSQL
 
 
 
