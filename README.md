@@ -27,18 +27,25 @@ is running on the default port (5432).(open pgadmin4 right click server > proper
 2. create database named "ozqdatabase" in that server use username - "postgres" and password - "0000"
 
 - if you are using different SQL client and not postgreSQL-
-
 1. makesure SQL alchemy supports it and install supporting driver library
 2. change the connection string on main/database.py to match your SQL client, server and database
 
 -- setting up python --
+
 1. set up a python environment (optionaal)
 2. run "pip install requirements.txt" in terminal
 
 -- launch the application--
+
 1. run "uvicorn app.main:app" in cmd
 2. ctrl click the http looks something like this http://127.0.0.1:8000. it will open this on web browser
 3. in browser navigate to http://127.0.0.1:8000/home
+
+
+--- Documentation ---
+
+5. to acess swagger docs navigate to http://127.0.0.1:8000/docs
+6. to acess ReDocs navigate to  navigate to http://127.0.0.1:8000/redoc
 
 
 
