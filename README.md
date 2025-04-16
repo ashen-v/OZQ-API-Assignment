@@ -24,7 +24,7 @@ variable ACESS_TOKEN_EXPIRE_MINUTES variable  in app/oauth2.py
 
 1. Install PostgreSQL from https://www.postgresql.org/download/ and make sure the PostgreSQL
 is running on the default port (5432).(open pgadmin4 right click server > properties > connection
-2. create database named "ozqdatabase" in that server use username - "postgres" and password - "0000"
+2. create database named "ozqdatabase" in that database use username - "postgres" and password - "0000"
 
 - if you are using different SQL client and not postgreSQL-
 1. makesure SQL alchemy supports it and install supporting driver library
