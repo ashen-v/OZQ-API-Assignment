@@ -28,6 +28,6 @@ async def home(request: Request):
 def cart_page(request: Request):
     return templates.TemplateResponse("cart.html", {"request": request})
 
-@router.get("/feedback", response_class=HTMLResponse)
+@router.get("/feedbacks", response_class=HTMLResponse)
 def feedback_page(request: Request):
     return templates.TemplateResponse("feedback.html", {"request": request})

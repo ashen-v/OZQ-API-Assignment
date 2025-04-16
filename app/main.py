@@ -28,4 +28,4 @@ app.include_router(htmlpages.router)
 
 @app.get("/")
 async def root():
-    return {"message": "Hello World"}
+    return {"message": "OZQ-web-application - 0.0.2 alpha by Ashen fernando for Esoft HND in computing assignment"}
